@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String   @id @default(uuid())
+  email    String   @unique
+  password String
+  name     String
+  roles    Role[]   @default([USER])
+  reviews  Review[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  orders    Order[]
+}
+
+model Product {
+  id          Int      @id @unique
+  name        String
+  images      String[]
+  price       Float
+  description String
+  count       Int
+  sale        Boolean  @default(false)
+  salePrice   Float
+  bitrixId    Int
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId String
+  Counter    Counter[]
+  reviews    Review[]
+}
+
+model Category {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  bitrixId  Int
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  products  Product[]
+}
+
+model Order {
+  id         String      @id @default(uuid())
+  status     OrderStatus @default(PROCESSING)
+  products   Counter[]
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  phone      String
+  comment    String
+  address    String
+  fullName   String
+  totalPrice Float       @default(0)
+  createdAt  DateTime    @default(now()) @map("created_at")
+  updatedAt  DateTime    @updatedAt @map("updated_at")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum OrderStatus {
+  PROCESSING
+  READY
+  RECEIVED
+  CANCELLED
+}
+
+model Counter {
+  id        String  @id @default(uuid())
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  count     Int
+  price     Int
+  Order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId   String
+  productId Int
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  rating    Int
+  text      String
+
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+  Product   Product? @relation(fields: [productId], references: [id])
+  productId Int?
+}
