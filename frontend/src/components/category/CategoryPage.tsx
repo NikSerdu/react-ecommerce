@@ -76,8 +76,9 @@ const CategoryPage: FC = () => {
 						<select
 							className='border-b border-primary outline-none text-xs'
 							onChange={e => setOrder(e.target.value as 'asc' | 'desc')}
+							defaultValue={'asc'}
 						>
-							<option value={'asc'} className='' selected>
+							<option value={'asc'} className=''>
 								Цена по возрастанию
 							</option>
 							<option value={'desc'} className=''>

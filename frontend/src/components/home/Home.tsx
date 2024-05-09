@@ -22,8 +22,8 @@ const Home: FC = () => {
 	return (
 		<Container>
 			<div className='flex max-[906px]:flex-col-reverse'>
-				<div className='pt-5 pb-5 min-[768px]:pr-20 border-r-2 border-primary/10 '>
-					<Sidebar className='min-[768px]:w-[100px]' />
+				<div className='pt-5 pb-5 min-[906px]:pr-20 border-r-2 border-primary/10 '>
+					<Sidebar className='min-[906px]:w-[150px]' />
 				</div>
 				<div className='min-w-[80%] w-full p-5 mx-auto'>
 					<Slider

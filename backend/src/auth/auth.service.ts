@@ -1,5 +1,4 @@
 import {
-	BadRequestException,
 	HttpException,
 	Injectable,
 	NotFoundException,
@@ -68,14 +67,14 @@ export class AuthService {
 		}
 	}
 
-	async registerAdmin(dto: AuthDto) {
+	async registerAdmin(dto: AuthDto, role: string) {
 		const oldUser = await this.prisma.user.findUnique({
 			where: {
 				email: dto.email
 			}
 		})
 		if (oldUser) {
-			throw new BadRequestException('User already exists')
+			throw new HttpException('User already exists', 409)
 		}
 
 		const user = await this.prisma.user.create({
@@ -83,7 +82,8 @@ export class AuthService {
 				email: dto.email,
 				name: dto.name,
 				password: await hash(dto.password),
-				roles: ['ADMIN', 'USER']
+				roles:
+					role === 'ADMIN' ? ['ADMIN', 'MANAGER', 'USER'] : ['MANAGER', 'USER']
 			}
 		})
 
@@ -137,9 +137,18 @@ export class AuthService {
 	async getAdmins() {
 		return await this.prisma.user.findMany({
 			where: {
-				roles: {
-					equals: ['ADMIN', 'USER']
-				}
+				OR: [
+					{
+						roles: {
+							has: 'ADMIN'
+						}
+					},
+					{
+						roles: {
+							has: 'MANAGER'
+						}
+					}
+				]
 			},
 			select: {
 				id: true,

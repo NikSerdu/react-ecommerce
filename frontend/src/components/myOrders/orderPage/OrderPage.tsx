@@ -77,7 +77,7 @@ const OrderPage: FC = () => {
 						<b>Код для получения заказа:</b>
 						<QRCode
 							size={256}
-							className='h-[20%] w-[20%] mt-5 '
+							className='h-[40%] w-[40%] max-[550px]:h-[70%] max-[550px]:w-[70%] mt-5 '
 							value={order.id}
 							viewBox={`0 0 256 256`}
 						/>

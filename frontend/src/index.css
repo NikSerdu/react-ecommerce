@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+	outline: none !important;
+}
+
 body {
 	font-family: 'Montserrat', sans-serif;
 	box-sizing: border-box;

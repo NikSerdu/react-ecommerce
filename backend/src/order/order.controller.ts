@@ -27,7 +27,7 @@ export class OrderController {
 		return this.orderService.updateStatus(orderId, status)
 	}
 
-	@Auth('admin')
+	@Auth('manager')
 	@Get()
 	async getAll() {
 		return this.orderService.getAll()
@@ -52,13 +52,13 @@ export class OrderController {
 		return this.orderService.create(userId, dto)
 	}
 
-	@Auth('admin')
+	@Auth('manager')
 	@Put(':orderId')
 	async update(@Param('orderId') orderId: string, @Body() dto: OrderDTOUpdate) {
 		return this.orderService.update(orderId, dto)
 	}
 
-	@Auth('admin')
+	@Auth('manager')
 	@Delete(':orderId')
 	async delete(@Param('orderId') orderId: string) {
 		return this.orderService.delete(orderId)

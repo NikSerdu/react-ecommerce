@@ -17,13 +17,14 @@ const CreateCategory: FC<TypeData> = ({
 		<div>
 			<h1 className='font-bold text-3xl'>Создать категорию</h1>
 			<form
-				className='mt-5 flex items-center gap-3'
+				className='mt-5 flex items-center gap-3 w-full'
 				onSubmit={e => handleSubmit(e, categoryName)}
 			>
 				<Input
 					placeholder='Название категории'
 					value={categoryName}
 					onChange={e => setCategoryName(e.target.value)}
+					className='w-full'
 				/>
 				<Button
 					text='Создать'

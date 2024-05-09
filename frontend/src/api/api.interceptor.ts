@@ -6,7 +6,6 @@ export const instance = axios.create({
 	baseURL: `${import.meta.env.VITE_SERVER_URL}/api`,
 	headers: {
 		'Content-Type': 'application/json'
-		// 'ngrok-skip-browser-warning': '123'
 	}
 })
 
@@ -14,7 +13,6 @@ export const instanceUploadFiles = axios.create({
 	baseURL: `${import.meta.env.VITE_SERVER_URL}/api`,
 	headers: {
 		'Content-Type': 'multipart/form-data'
-		// 'ngrok-skip-browser-warning': '123'
 	}
 })
 
@@ -22,7 +20,6 @@ export const authInstance = axios.create({
 	baseURL: `${import.meta.env.VITE_SERVER_URL}/api`,
 	headers: {
 		'Content-Type': 'application/json'
-		// 'ngrok-skip-browser-warning': '123'
 	}
 })
 

@@ -51,7 +51,7 @@ export class ProductController {
 	}
 
 	@UsePipes(new ValidationPipe())
-	@Auth('admin')
+	@Auth('manager')
 	@Post()
 	@UseInterceptors(FilesInterceptor('images'))
 	async create(
@@ -63,7 +63,7 @@ export class ProductController {
 	}
 
 	@UsePipes(new ValidationPipe())
-	@Auth('admin')
+	@Auth('manager')
 	@Put(':id')
 	@UseInterceptors(FilesInterceptor('images'))
 	async update(
@@ -76,13 +76,12 @@ export class ProductController {
 	}
 
 	@UsePipes(new ValidationPipe())
-	@Auth('admin')
+	@Auth('manager')
 	@Delete(':id')
 	async delete(@Param('id') id: string) {
 		return this.productService.delete(+id)
 	}
 
-	@Auth('admin')
 	@Patch('decrease/:productId/:decreaseCount')
 	async decreaseCount(
 		@Param() params: { productId: string; decreaseCount: number }
@@ -93,7 +92,6 @@ export class ProductController {
 		)
 	}
 
-	@Auth('admin')
 	@Patch('increase/:productId/:increaseCount')
 	async increaseCount(
 		@Param() params: { productId: string; increaseCount: number }

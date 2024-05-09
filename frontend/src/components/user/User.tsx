@@ -52,14 +52,17 @@ const User: FC = () => {
 						>
 							Мои заказы
 						</Link>
-						{!isLoading && user && user.roles.includes('ADMIN') && (
-							<Link
-								to={'dashboard'}
-								className='hover:bg-slate-100 hover:rounded-tr-xl hover:rounded-tl-xl p-2'
-							>
-								Админ панель
-							</Link>
-						)}
+						{!isLoading &&
+							user &&
+							(user.roles.includes('ADMIN') ||
+								user.roles.includes('MANAGER')) && (
+								<Link
+									to={'dashboard'}
+									className='hover:bg-slate-100 hover:rounded-tr-xl hover:rounded-tl-xl p-2'
+								>
+									Админ панель
+								</Link>
+							)}
 						<Link to={'settings'} className='hover:bg-slate-100 px-2 py-2'>
 							Настройки
 						</Link>

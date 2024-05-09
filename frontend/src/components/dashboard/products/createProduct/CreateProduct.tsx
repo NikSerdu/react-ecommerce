@@ -124,7 +124,7 @@ const CreateProduct: FC<TypeData> = ({ refetchProducts }) => {
 				<div className=''>
 					<div className='mt-3 '>
 						{
-							<div className='flex gap-4 flex-wrap items-center'>
+							<div className='flex gap-4 flex-wrap items-center max-[670px]:justify-center'>
 								{uploadedFiles.map((file, index) => (
 									<div key={index} className='relative'>
 										<div
@@ -165,7 +165,7 @@ const CreateProduct: FC<TypeData> = ({ refetchProducts }) => {
 						}
 					</div>
 				</div>
-				<div className='mt-10 flex gap-4 flex-wrap gap-y-8'>
+				<div className='mt-10 flex gap-4 flex-wrap gap-y-8 max-[500px]:flex-col'>
 					<div className='flex flex-col '>
 						<Controller
 							name='id'

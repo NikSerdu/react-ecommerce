@@ -9,7 +9,7 @@ const CategoryList: FC<TypeData> = ({ categories, deleteCategory }) => {
 	return (
 		<div>
 			<h2 className='font-bold text-xl mt-5'>Список категорий</h2>
-			<div className='mt-5 flex flex-col gap-5 w-2/5'>
+			<div className='mt-5 flex flex-col gap-5'>
 				{categories &&
 					categories.map(item => {
 						return (

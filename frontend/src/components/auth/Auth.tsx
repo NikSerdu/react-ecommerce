@@ -1,5 +1,6 @@
 import { FC, useLayoutEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { useActions } from '../../hooks/useActions'
 import { useAuth } from '../../hooks/useAuth'
 import Button from '../ui/button/Button'
@@ -15,7 +16,7 @@ const Auth: FC<TypeData> = ({ variant = 'login' }) => {
 
 	useLayoutEffect(() => {
 		if (user) {
-			navigate('/')
+			navigate(-1)
 		}
 	}, [user])
 	const [type, setType] = useState<'login' | 'sign-up'>(variant)
@@ -24,19 +25,41 @@ const Auth: FC<TypeData> = ({ variant = 'login' }) => {
 	const [email, setEmail] = useState<string>('')
 	const { register, login } = useActions()
 	const handleRegister = () => {
-		register({ email, name, password })
-		setEmail('')
-		setPassword('')
-		setName('')
+		if (name.length < 2 || !validateName(name)) {
+			toast('Имя должны содержать только буквы (не менее 2)!', {
+				type: 'error'
+			})
+		}
+		if (validateEmail(email)) {
+			register({ email, name, password })
+			setEmail('')
+			setPassword('')
+			setName('')
+		} else {
+			toast('Email некорректен!', { type: 'error' })
+		}
 	}
 	const handleLogin = () => {
-		try {
+		if (validateEmail(email)) {
 			login({ email, password })
-		} catch (e) {
-			// console.log(e)
+			setPassword('')
+			setEmail('')
+		} else {
+			toast('Email некорректен!', { type: 'error' })
 		}
-		setPassword('')
-		setEmail('')
+	}
+
+	const validateEmail = (email: string) => {
+		return String(email)
+			.toLowerCase()
+			.match(
+				/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+			)
+	}
+	const validateName = (name: string) => {
+		return String(name)
+			.toLowerCase()
+			.match(/^[a-zA-Z ]+$/)
 	}
 	return (
 		<>

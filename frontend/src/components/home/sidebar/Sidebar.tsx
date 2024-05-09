@@ -18,7 +18,7 @@ const Sidebar: FC<TypeData> = ({ className = '' }) => {
 			className={cn(
 				'text-sm',
 				className,
-				'max-[768px]:flex max-[768px]:gap-3 max-[768px]:w-full max-[768px]:justify-center max-[768px]:text-center max-[768px]:px-5 max-[768px]:items-center flex-wrap'
+				'max-[906px]:flex max-[906px]:gap-3 max-[906px]:w-full max-[906px]:justify-center max-[906px]:text-center max-[906px]:px-5 max-[906px]:items-center flex-wrap'
 			)}
 		>
 			{!isLoading &&
@@ -26,12 +26,12 @@ const Sidebar: FC<TypeData> = ({ className = '' }) => {
 				categories.map(item => {
 					return (
 						<li
-							className='hover:cursor-pointer mt-1  max-[768px]:p-3 max-[768px]:border max-[768px]:rounded-md'
+							className='hover:cursor-pointer mt-1  max-[906px]:p-3 max-[906px]:border max-[906px]:rounded-md'
 							key={item.id}
 						>
 							<Link
 								to={`products/${item.name}/${item.id}`}
-								className='p-1 max-[768px]:w-full'
+								className='p-1 max-[906px]:w-full'
 							>
 								{item.name}
 							</Link>

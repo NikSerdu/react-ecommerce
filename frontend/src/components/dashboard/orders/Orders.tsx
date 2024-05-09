@@ -8,7 +8,7 @@ const Orders: FC = () => {
 	const navigate = useNavigate()
 	const handleSubmit = e => {
 		e.preventDefault()
-		navigate(`/my-orders/${order_id}`)
+		navigate(`/orders/${order_id}`)
 	}
 	return (
 		<div>
@@ -25,7 +25,7 @@ const Orders: FC = () => {
 			</form>
 			<div className='w-[300px] mt-10 mx-auto'>
 				<Scanner
-					onResult={(text, result) => navigate(`/my-orders/${text}`)}
+					onResult={(text, result) => navigate(`/orders/${text}`)}
 					onError={error => console.log(error?.message)}
 				/>
 			</div>

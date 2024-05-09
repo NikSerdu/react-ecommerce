@@ -10,10 +10,11 @@ import UpdateProduct from './components/dashboard/products/updateProduct/UpdateP
 import FavouritesPage from './components/favourites/FavouritesPage'
 import Home from './components/home/Home'
 import MyOrders from './components/myOrders/MyOrders'
-import OrderPage from './components/myOrders/orderPage/OrderPage'
 import NotFoundPage from './components/notFound/NotFoundPage'
+
+import OrderPage from './components/myOrders/orderPage/OrderPage'
 import ProductPage from './components/product/ProductPage'
-import AdminRoute from './components/routes/adminRoute'
+import AdminManagerRoute from './components/routes/adminManagerRoute'
 import ThanksPage from './components/thanks/ThanksPage'
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
 					path='/products/:categoryName/:categoryId'
 				/>
 				<Route element={<ProductPage />} path='/product/:productId' />
-				<Route element={<AdminRoute />}>
+				<Route element={<AdminManagerRoute />}>
 					<Route path='/dashboard' element={<Dashboard />} />
 					<Route
 						path='/dashboard/product/update/:productId'

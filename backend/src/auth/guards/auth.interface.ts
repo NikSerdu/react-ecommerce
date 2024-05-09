@@ -1,1 +1,1 @@
-export type TypeRole = 'user' | 'admin' | undefined
+export type TypeRole = 'user' | 'admin' | 'manager' | undefined

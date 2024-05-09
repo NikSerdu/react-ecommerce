@@ -1,48 +1,56 @@
+import { Tab, Tabs } from '@nextui-org/tabs'
 import { FC, ReactNode } from 'react'
+import { useAuth } from '../../hooks/useAuth'
 import Container from '../ui/container/Container'
-import Tabs from '../ui/tabs/Tabs'
 import Admins from './admins/Admins'
 import Categories from './categories/Categories'
 import Orders from './orders/Orders'
 import Products from './products/Products'
 
-const items: {
-	id: number
-	title: string
-	content: ReactNode
-}[] = [
-	{
-		id: 1,
-		title: 'Продукты',
-		content: <Products />
-	},
-	{
-		id: 2,
-		title: 'Категории',
-		content: <Categories />
-	},
-	{
-		id: 3,
-		title: 'Заказы',
-		content: <Orders />
-	},
-	{
-		id: 4,
-		title: 'Аккаунты',
-		content: <Admins />
-	}
-]
-
 const Dashboard: FC = () => {
+	const { user } = useAuth()
+
+	const tabs:
+		| {
+				id: number
+				title: string
+				content: ReactNode
+		  }[] = [
+		{
+			id: 1,
+			title: 'Продукты',
+			content: <Products />
+		},
+		{
+			id: 2,
+			title: 'Категории',
+			content: <Categories />
+		},
+		{
+			id: 3,
+			title: 'Заказы',
+			content: <Orders />
+		}
+	]
+
+	if (user && user.roles.includes('ADMIN')) {
+		tabs.push({
+			id: 4,
+			title: 'Аккаунты',
+			content: <Admins />
+		})
+	}
+
 	return (
 		<Container>
 			<div className='mt-5'>
-				<Tabs
-					items={items}
-					orientation='vertical'
-					className='text-sm'
-					showButtons={false}
-				/>
+				<Tabs variant='solid' color='primary' fullWidth={true}>
+					{tabs.map(tab => (
+						<Tab title={tab.title} key={tab.id}>
+							<div className='mt-5'>{tab.content}</div>
+						</Tab>
+					))}
+				</Tabs>
 			</div>
 		</Container>
 	)

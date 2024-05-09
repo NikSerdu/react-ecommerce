@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import { FC, useState } from 'react'
 import { toast } from 'react-toastify'
 import { AuthService } from '../../../services/auth.service'
@@ -7,25 +8,34 @@ import Input from '../../ui/input/Input'
 import AdminList from './adminList/AdminList'
 
 const Admins: FC = () => {
-	const {
-		data: admins,
-		refetch,
-		isLoading
-	} = useQuery({
+	const { data: admins, refetch } = useQuery({
 		queryKey: ['get admins'],
 		queryFn: () => AuthService.getAdmins()
 	})
-
+	const [role, setRole] = useState<'ADMIN' | 'MANAGER'>('MANAGER')
 	const [name, setName] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
 	const [email, setEmail] = useState<string>('')
 	const { mutateAsync: registerAdmin } = useMutation({
-		mutationFn: () => AuthService.registerAdmin({ email, name, password }),
+		mutationFn: () =>
+			AuthService.registerAdmin({ email, name, password }, role),
 		onSuccess() {
 			toast(`${name} успешно зарегистрирован`, { type: 'success' })
 			setName('')
 			setPassword('')
 			setEmail('')
+			refetch()
+		},
+		onError(error: AxiosError) {
+			if (error.response?.status === 409) {
+				toast('Пользователь с таким email уже существует!', {
+					type: 'error'
+				})
+			} else {
+				toast('Что-то пошло не так...', {
+					type: 'error'
+				})
+			}
 		}
 	})
 
@@ -43,11 +53,11 @@ const Admins: FC = () => {
 	return (
 		<div>
 			<div className=''>
-				<h1 className='font-bold text-3xl'>Администраторы</h1>
+				<h1 className='font-bold text-3xl'>Администраторы/менеджеры</h1>
 			</div>
 			<form
 				action=''
-				className='flex flex-col w-1/3 gap-3 mt-3'
+				className='flex flex-col min-[900px]:w-1/3 gap-3 mt-3'
 				onSubmit={handleSubmit}
 			>
 				<div className=''>
@@ -78,6 +88,18 @@ const Admins: FC = () => {
 						autoComplete='off'
 					/>
 				</div>
+				<select
+					className='border-b border-primary outline-none text-xs'
+					onChange={e => setRole(e.target.value as 'ADMIN' | 'MANAGER')}
+					defaultValue={'MANAGER'}
+				>
+					<option value={'ADMIN'} className=''>
+						Администратор
+					</option>
+					<option value={'MANAGER'} className=''>
+						Менеджер
+					</option>
+				</select>
 				<Button
 					text='Зарегистрировать'
 					variant='fill'

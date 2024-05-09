@@ -43,13 +43,20 @@ const Categories: FC = () => {
 	}
 	return (
 		<div>
-			<CreateCategory
-				handleSubmit={handleSubmit}
-				categoryName={categoryName}
-				setCategoryName={setCategoryName}
-			/>
+			<div className='min-[1000px]:w-2/4'>
+				<CreateCategory
+					handleSubmit={handleSubmit}
+					categoryName={categoryName}
+					setCategoryName={setCategoryName}
+				/>
+			</div>
 			{categories && (
-				<CategoryList categories={categories} deleteCategory={deleteCategory} />
+				<div className='min-[1000px]:w-2/4'>
+					<CategoryList
+						categories={categories}
+						deleteCategory={deleteCategory}
+					/>
+				</div>
 			)}
 		</div>
 	)

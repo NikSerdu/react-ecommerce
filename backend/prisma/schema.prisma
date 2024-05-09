@@ -66,6 +66,7 @@ model Order {
 enum Role {
   USER
   ADMIN
+  MANAGER
 }
 
 enum OrderStatus {

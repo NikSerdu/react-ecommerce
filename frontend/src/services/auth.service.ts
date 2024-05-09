@@ -60,9 +60,9 @@ export const AuthService = {
 		})
 		if (response.data.id) return response
 	},
-	async registerAdmin(data: IRegister) {
+	async registerAdmin(data: IRegister, role: string) {
 		const response = await authInstance<IUser>({
-			url: '/auth/register-admin',
+			url: `/auth/register-admin/${role}`,
 			method: 'POST',
 			data
 		})

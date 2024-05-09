@@ -128,10 +128,8 @@ const UpdateProduct: FC = () => {
 					const response = await fetch(
 						`${import.meta.env.VITE_SERVER_URL}${url}`
 					)
-					// console.log(response, response.blob(), response.body)
 
 					const name = url.split('/').at(-1)
-					console.log(name)
 
 					const blob = await response.blob()
 					let metadata = {

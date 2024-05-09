@@ -27,9 +27,9 @@ export class AuthController {
 	@Auth('admin')
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
-	@Post('register-admin')
-	async registerAdmin(@Body() dto: AuthDto) {
-		return this.authService.registerAdmin(dto)
+	@Post('register-admin/:role')
+	async registerAdmin(@Body() dto: AuthDto, @Param('role') role: string) {
+		return this.authService.registerAdmin(dto, role)
 	}
 
 	@Auth('admin')
@@ -56,6 +56,7 @@ export class AuthController {
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
 	@Delete(':id')
+	@Auth('admin')
 	async delete(@Param('id') id: string) {
 		return this.authService.deleteUser(id)
 	}
