@@ -1,21 +1,23 @@
 import { Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import './App.css'
-import Auth from './components/auth/Auth'
-import CartPage from './components/cart/CartPage'
-import Catalog from './components/catalog/Catalog'
-import CategoryPage from './components/category/CategoryPage'
-import Dashboard from './components/dashboard/Dashboard'
-import UpdateProduct from './components/dashboard/products/updateProduct/UpdateProduct'
-import FavouritesPage from './components/favourites/FavouritesPage'
-import Home from './components/home/Home'
-import MyOrders from './components/myOrders/MyOrders'
-import NotFoundPage from './components/notFound/NotFoundPage'
 
-import OrderPage from './components/myOrders/orderPage/OrderPage'
-import ProductPage from './components/product/ProductPage'
+import CategoryPage from './components/category/CategoryPage'
+
+import NotFoundPage from './pages/notFound/NotFoundPage'
+
 import AdminManagerRoute from './components/routes/adminManagerRoute'
-import ThanksPage from './components/thanks/ThanksPage'
+import Auth from './pages/auth/Auth'
+import CartPage from './pages/cart/CartPage'
+import Catalog from './pages/catalog/Catalog'
+import Dashboard from './pages/dashboard/Dashboard'
+import UpdateProduct from './pages/dashboard/products/updateProduct/UpdateProduct'
+import FavouritesPage from './pages/favourites/FavouritesPage'
+import Home from './pages/home/Home'
+import MyOrders from './pages/myOrders/MyOrders'
+import OrderPage from './pages/myOrders/orderPage/OrderPage'
+import ProductPage from './pages/product/ProductPage'
+import ThanksPage from './pages/thanks/ThanksPage'
 
 function App() {
 	return (
